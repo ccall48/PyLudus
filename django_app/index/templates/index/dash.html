@@ -1,0 +1,33 @@
+{% extends 'index/fbase.html' %}
+
+{% block content %}
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="jumbotron-heading">Login Successful!</h1>
+    <p class="lead text-muted">Well done you have successfully logged in as {{ user.username }} </p>
+    <p>
+      <a href="#" class="btn btn-primary">Click here to begin</a>
+    </p>
+  </div>
+</section>
+<div class="container text-center">
+    <hr>
+    <h1>This is private information (<a href="{% url 'logout' %}">Logout</a>)</h1>
+    <p>Your user id is: {{ user.id }}</p>
+    <p>Your username is: {{ user.username }}</p>
+    {% if birthday or message %}
+      <font color="red">
+        <h3>{{message}}</h3>
+      </font>
+      <p>Your birthday is {{ birthday }}</p>
+    {% elif not birthday %}
+      <p>Please enter your birthday</p>
+      <form action="/dash" method="POST">
+        {% csrf_token %}
+        <input type="text" name="birthday" placeholder="When were you born">
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+        <input type="Submit" value="SEND">
+      </form>
+    {% endif %}
+</div>
+{% endblock %}

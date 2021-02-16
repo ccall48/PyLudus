@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+    #db:
+    #dbimage: postgres
+    #dbenvironment:
+    #db  - POSTGRES_DB=postgres
+    #db  - POSTGRES_USER=postgres
+    #db  - POSTGRES_PASSWORD=postgres
+    #db  -
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+     - .:/code
+    ports:
+     - ${VIRTUAL_PORT:-8000}:8000
+    networks:
+     - nginx
+    env_file:
+     - .env
+    #depends_on:
+    #  - db
+    restart: unless-stopped
+
+networks:
+  nginx:
+    external:
+      name: webproxy

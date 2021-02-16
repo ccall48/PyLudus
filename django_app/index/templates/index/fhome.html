@@ -1,0 +1,21 @@
+{% extends 'index/fbase.html' %}
+{% block content %}
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1>Hi, this is a public page</h1>
+    <h1 class="jumbotron-heading">Welcome to DJTemplate</h1>
+    <p class="lead text-muted">From Here you can get started with any web app you need. <br>
+    To test this template please try and signup then login to your profile</p>
+    <p>
+      <p> There are <b>{{num_users}}</b> users signed up </p>
+    </p>
+  </div>
+</section>
+<div class="container text-center">
+    <hr>
+  <h1>About This Page</h1>
+    <p>
+        Seeing this page means you have reached the starting point of this web app and can start to build on this point forward. Fusion
+    </p>
+</div>
+{% endblock %}
