@@ -1,0 +1,3 @@
+https://github.com/Lady3mlnm/summary_python_deep_dive/blob/master/Standard%20data%20types/list.ipynb
+
+https://www.python.org/doc/
