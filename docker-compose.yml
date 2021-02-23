@@ -37,7 +37,8 @@ services:
       # FUSIONAUTH_RUNTIME_MODE: development
       FUSIONAUTH_APP_MEMORY: ${FUSIONAUTH_APP_MEMORY}
       FUSIONAUTH_APP_RUNTIME_MODE: development
-      FUSIONAUTH_APP_URL: ${FUSIONAUTH_APP_URL:-http://fusionauth:9011}
+      FUSIONAUTH_APP_URL: "${FUSIONAUTH_APP_PROTOCOL}://${FUSIONAUTH_APP_HOST}:${FUSIONAUTH_APP_PORT}"
+
       SEARCH_TYPE: database
 
     networks:
@@ -45,7 +46,7 @@ services:
       - auth
     restart: unless-stopped
     ports:
-      - 9011:9011
+        - ${FUSIONAUTH_APP_PORT:-9011}:9011
     volumes:
       - fa_config:/usr/local/fusionauth/config
   #db:
@@ -64,11 +65,15 @@ services:
     volumes:
       - ./django_app:/code
     ports:
-      - 8000:8000
+        - ${DJANGO_PORT:-8000}:8000
     networks:
       - auth
     env_file:
       - .env
+    environment:
+        LOGIN_REDIRECT_URL: "${DJANGO_PROTOCOL}://${DJANGO_HOST}:${DJANGO_PORT}/dash"
+        FUSION_AUTH_INTERNAL_API_URL: "${FUSION_AUTH_INTERNAL_API_PROTOCOL}://${FUSION_AUTH_INTERNAL_API_HOST}:${FUSION_AUTH_INTERNAL_API_PORT}"
+        FUSION_AUTH_BASE_URL: "${FUSIONAUTH_APP_PROTOCOL}://${FUSIONAUTH_APP_HOST}:${FUSIONAUTH_APP_PORT}"
     #depends_on:
     #  - db
     restart: unless-stopped

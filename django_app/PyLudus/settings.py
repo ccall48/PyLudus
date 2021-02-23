@@ -24,19 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.environ.get('DEBUG') == 'true' else False
-print(f"{DEBUG=}")
+DEBUG = os.environ.get('DEBUG') == 'true'
+print(f'{DEBUG=}')
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1')
 if ',' in ALLOWED_HOSTS:
     ALLOWED_HOSTS = ALLOWED_HOSTS.split(',')
 else:
     ALLOWED_HOSTS = [ ALLOWED_HOSTS ]
+print(f'{ALLOWED_HOSTS}')
 
 
 
 #LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = os.environ.get('LOGIN_REDIRECT_URL')
+LOGIN_REDIRECT_URL = os.environ.get('LOGIN_REDIRECT_URL', 'http://127.0.0.1:8000')
 #LOGOUT_REDIRECT_URL = 'home'
 
 
