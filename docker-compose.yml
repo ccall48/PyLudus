@@ -39,26 +39,46 @@ services:
       FUSIONAUTH_APP_RUNTIME_MODE: development
       FUSIONAUTH_APP_URL: ${FUSIONAUTH_APP_URL:-http://fusionauth:9011}
       SEARCH_TYPE: database
-      VIRTUAL_HOST: ${VIRTUAL_HOST}
-      VIRTUAL_PORT: ${VIRTUAL_PORT:-9011}
-      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
 
     networks:
-     - db
-     - nginx
+      - db
+      - auth
     restart: unless-stopped
     ports:
-        - ${VIRTUAL_PORT:-9011}:9011
+      - 9011:9011
     volumes:
       - fa_config:/usr/local/fusionauth/config
+  #db:
+    #db:tv
+    #dbimage: postgres
+    #dbenvironment:
+    #db  - POSTGRES_DB=postgres
+    #db  - POSTGRES_USER=postgres
+    #db  - POSTGRES_PASSWORD=postgres
+    #db  -
+  web:
+    depends_on:
+      - fusionauth
+    build: ./django_app
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./django_app:/code
+    ports:
+      - 8000:8000
+    networks:
+      - auth
+    env_file:
+      - .env
+    #depends_on:
+    #  - db
+    restart: unless-stopped
+
 
 networks:
   db:
     driver: bridge
-  nginx:
-    external:
-      name: webproxy
+  auth:
+    driver: bridge
 
 volumes:
   db_data:

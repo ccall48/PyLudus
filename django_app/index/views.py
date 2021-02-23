@@ -46,7 +46,7 @@ def get_login_url(request):
 
 def is_user_login_ok(request):
     print("starting login")
-    client = FusionAuthClient(settings.FUSION_AUTH_API_KEY, settings.FUSION_AUTH_BASE_URL)
+    client = FusionAuthClient(settings.FUSION_AUTH_API_KEY, settings.FUSION_AUTH_INTERNAL_API_URL)
 
     code = request.GET.get("code")
     print(f"{code=}")
@@ -101,7 +101,7 @@ class DashView(View):
         user = None
 
         try:
-            client = FusionAuthClient(settings.FUSION_AUTH_API_KEY, settings.FUSION_AUTH_BASE_URL)
+            client = FusionAuthClient(settings.FUSION_AUTH_API_KEY, settings.FUSION_AUTH_INTERNAL_API_URL)
             print(f"{user_id=}")
             r = client.retrieve_user(user_id)
             if r.was_successful():
@@ -145,7 +145,7 @@ class DashView(View):
 
         try:
             client = FusionAuthClient(
-                settings.FUSION_AUTH_API_KEY, settings.FUSION_AUTH_BASE_URL
+                settings.FUSION_AUTH_API_KEY, settings.FUSION_AUTH_INTERNAL_API_URL
             )
             r = client.patch_user(
                 user_id, {"user": {"birthDate": normalised_birthday}}
