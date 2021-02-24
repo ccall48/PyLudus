@@ -15,6 +15,7 @@
     <h1>This is private information (<a href="{% url 'logout' %}">Logout</a>)</h1>
     <p>Your user id is: {{ user.id }}</p>
     <p>Your username is: {{ user.username }}</p>
+    <p>Your email is: {{ user.email }}</p>
     {% if birthday or message %}
       <font color="red">
         <h3>{{message}}</h3>
@@ -31,3 +32,5 @@
     {% endif %}
 </div>
 {% endblock %}
+
+
