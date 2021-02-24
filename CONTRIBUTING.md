@@ -27,20 +27,66 @@ For any Collaborators, since you have write permissions already to the original 
 
  - Clone your fork to a local project directory 
  - Install the project's dependencies 
- - Prepare your hosts file
+ - **Configuring Environment variables**
 
-### Without Docker
-Some additional steps are needed when not using Docker. Docker abstracts away these steps which is why using it is generally recommended.
+	These contain various settings used by the website.
+	You need to make the following changes to the [`.env.sample`](https://github.com/AAADevs/PyLudus/blob/main/.env.sample).
+	```bash
+	# FUSION AUTH
+	POSTGRES_USER=postgres
+	POSTGRES_PASSWORD=<replace me> # create a random bunch of characters, and do not share this
 
-1. **PostgreSQL setup**
-	. . . 
+	# Prior to version 1.19.0, using DATABASE_USER
+	DATABASE_USER=fusionauth
 
-2. **Environment variables**
-	These contain various settings used by the website. 
-	. . .
+	# >= 1.19.0, using DATABASE_USERNAME
+	DATABASE_USERNAME=fusionauth
+	DATABASE_PASSWORD=<replace me> # create a random bunch of characters, and do not share this
+	ES_JAVA_OPTS=-Xms512m -Xmx512m
 
-3. **Fusion Auth setup**
-	. . . 
+	# Prior to version 1.19.0, using FUSIONAUTH_MEMORY
+	FUSIONAUTH_MEMORY=512M
+
+	# >= 1.19.0, using FUSIONAUTH_APP_MEMORY
+	FUSIONAUTH_APP_MEMORY=512M
+	FUSIONAUTH_APP_PROTOCOL='http'
+	FUSIONAUTH_APP_HOST='192.168.1.141' # replace with your local machine IP address (`hostname -I`)
+	FUSIONAUTH_APP_PORT='9011'
+
+	# ----------------------------------------------------------------------------------------------
+
+	# DJANGO
+	SECRET_KEY='<replace me>' # create a random bunch of characters, and do not share this
+
+	# For dev and testing
+	DEBUG=true
+	# For production
+	# DEBUG = false
+
+	# replace with your local network IP address
+	# can be a list of IP addresses or hostnames seperated by commas
+	ALLOWED_HOSTS='192.168.1.141,127.0.0.1' # replace with your local machine IP address, followed with your localhost IP 
+
+	# Fusion specific variables
+	# NOTE: SECURE_SSL_REDIRECT is not used currently
+	# SECURE_SSL_REDIRECT=true
+	# replace with your local network IP address
+	DJANGO_PROTOCOL='http'
+	DJANGO_HOST='192.168.1.141' # replace with your local machine IP address
+	DJANGO_PORT='8000'
+
+	# get from fusion after app creation
+	FUSION_AUTH_APP_ID='<replace me>'
+	# get from fusion after app creation
+	FUSION_AUTH_CLIENT_SECRET='<replace me>'
+	# get from fusion in the settings -> api keys
+	FUSION_AUTH_API_KEY='<replace me>'
+
+	# internal hostname for fusion, for now we don't need to go out the container network to do API auth
+	FUSION_AUTH_INTERNAL_API_PROTOCOL='http'
+	FUSION_AUTH_INTERNAL_API_HOST='fusionauth'
+	FUSION_AUTH_INTERNAL_API_PORT='9011'
+	```
 	
 # Run the project
 The project can be started with Docker or by running it directly on your system.
@@ -48,21 +94,18 @@ The project can be started with Docker or by running it directly on your system.
 ### Run with Docker
 Start the containers using Docker Compose:
 ```bash
-docker-compose up
+./start.sh # Runs docker-compose -d
+
+# Init the database and running initial migrations
+docker exec -it pyludus_web_1 /bin/bash
+python manage.py makemigrations
+python manage.py migrate
+exit # Exit out of the docker shell
+
+# Restart the docker images
+docker-compose down; sleep 2; docker-compose up -d
 ```
 The `-d` option can be appended to the command to run in detached mode. This runs the containers in the background so the current terminal session is available for use with other things.
-
-### Run on the host
-Running on the host is particularly useful if you wish to debug the site. The environment variables shown in a previous section need to have been configured.
-
-**Database**
-. . .
-
-**Fusion Auth**
-. . .
-
-**Starting The Site**
-. . .
 
 # Django admin site
 Django provides an interface for administration with which you can view and edit the models among other things. It can be found at  http://<local_host_url_here>. The default credentials are `admin` for the username and `admin` for the password.
