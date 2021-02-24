@@ -63,14 +63,13 @@ For any Collaborators, since you have write permissions already to the original 
 	# For production
 	# DEBUG = false
 
-	# replace with your local network IP address
-	# can be a list of IP addresses or hostnames seperated by commas
+	# can be a list seperated by commas
 	ALLOWED_HOSTS='192.168.1.141,127.0.0.1' # replace with your local machine IP address, followed with your localhost IP 
 
 	# Fusion specific variables
 	# NOTE: SECURE_SSL_REDIRECT is not used currently
 	# SECURE_SSL_REDIRECT=true
-	# replace with your local network IP address
+	
 	DJANGO_PROTOCOL='http'
 	DJANGO_HOST='192.168.1.141' # replace with your local machine IP address
 	DJANGO_PORT='8000'
@@ -89,7 +88,7 @@ For any Collaborators, since you have write permissions already to the original 
 	```
 	
 # Run the project
-The project can be started with Docker or by running it directly on your system.
+The project can be started with Docker as of now.
 
 ### Run with Docker
 Start the containers using Docker Compose:
