@@ -93,10 +93,12 @@ The project can be started with Docker as of now.
 ### Run with Docker
 Start the containers using Docker Compose:
 ```bash
-./start.sh # Runs docker-compose -d
+chmod +x pyludus.sh 
+
+./pyludus.sh start # Runs docker-compose -d
 
 # Init the database and running initial migrations
-docker exec -it pyludus_web_1 /bin/bash
+./pyludus.sh shell
 python manage.py makemigrations
 python manage.py migrate
 exit # Exit out of the docker shell
