@@ -25,8 +25,8 @@ For any Collaborators, since you have write permissions already to the original 
 
 # Development environment
 
- - Clone your fork to a local project directory 
- - Install the project's dependencies 
+ - Clone your fork to a local project directory
+ - Install the project's dependencies
  - **Configuring Environment variables**
 
 	These contain various settings used by the website.
@@ -64,12 +64,12 @@ For any Collaborators, since you have write permissions already to the original 
 	# DEBUG = false
 
 	# can be a list seperated by commas
-	ALLOWED_HOSTS='192.168.1.141,127.0.0.1' # replace with your local machine IP address, followed with your localhost IP 
+	ALLOWED_HOSTS='192.168.1.141,127.0.0.1' # replace with your local machine IP address, followed with your localhost IP
 
 	# Fusion specific variables
 	# NOTE: SECURE_SSL_REDIRECT is not used currently
 	# SECURE_SSL_REDIRECT=true
-	
+
 	DJANGO_PROTOCOL='http'
 	DJANGO_HOST='192.168.1.141' # replace with your local machine IP address
 	DJANGO_PORT='8000'
@@ -86,17 +86,19 @@ For any Collaborators, since you have write permissions already to the original 
 	FUSION_AUTH_INTERNAL_API_HOST='fusionauth'
 	FUSION_AUTH_INTERNAL_API_PORT='9011'
 	```
-	
+
 # Run the project
 The project can be started with Docker as of now.
 
 ### Run with Docker
 Start the containers using Docker Compose:
 ```bash
-./start.sh # Runs docker-compose -d
+chmod +x pyludus.sh 
+
+./pyludus.sh start # Runs docker-compose -d
 
 # Init the database and running initial migrations
-docker exec -it pyludus_web_1 /bin/bash
+./pyludus.sh shell
 python manage.py makemigrations
 python manage.py migrate
 exit # Exit out of the docker shell
@@ -130,5 +132,5 @@ Click [here](https://rogerdudler.github.io/git-guide/) to see the basic Git work
 5. **Make great commits**. A well structured git log is key to a project's maintainability; it efficiently provides insight into when and *why* things were done for future maintainers of the project.
     * A more in-depth guide to writing great commit messages can be found in Chris Beam's [*How to Write a Git Commit Message*](https://chris.beams.io/posts/git-commit/).
 
-6. If someone is working on an issue or pull request, **do not open your own pull request for the same task**. Instead, collaborate with the author(s) of the existing pull request. Duplicate PRs opened without communicating with the other author(s) or collaborators, will be closed. 
+6. If someone is working on an issue or pull request, **do not open your own pull request for the same task**. Instead, collaborate with the author(s) of the existing pull request. Duplicate PRs opened without communicating with the other author(s) or collaborators, will be closed.
     * One option is to fork the other contributor's repository and submit your changes to their branch with your own pull request. We suggest following these guidelines when interacting with their repository as well.
