@@ -60,10 +60,12 @@ services:
   web:
     depends_on:
       - fusionauth
-    build: ./django_app
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./django_app:/code
+      - .:/code
     ports:
         - ${DJANGO_PORT:-8000}:8000
     networks:
