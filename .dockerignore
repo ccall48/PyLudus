@@ -1,0 +1,15 @@
+.cache
+.git
+.github
+.gitignore
+.venv
+__pycache__
+CHANGELOG.md
+CONTRIBUTING.md
+docker-compose.yml
+Dockerfile
+docs
+LICENSE
+README.md
+scripts
+ven
