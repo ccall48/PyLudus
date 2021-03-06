@@ -130,3 +130,7 @@ dmypy.json
 
 # Pipfiles
 Pipfile*
+
+# Linting Files
+.pre-commit-config.yaml
+.flake8

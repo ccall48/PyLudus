@@ -80,7 +80,7 @@ ROOT_URLCONF = "PyLudus.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'PyLudus', 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, "PyLudus", "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

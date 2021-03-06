@@ -58,6 +58,9 @@ For any Collaborators, since you have write permissions already to the original 
 	# DJANGO
 	SECRET_KEY='<replace me>' # create a random bunch of characters, and do not share this
 
+    SUPER_USERNAME=admin
+    SUPER_PASSWORD=admin
+
 	# For dev and testing
 	DEBUG=true
 	# For production
@@ -93,18 +96,10 @@ The project can be started with Docker as of now.
 ### Run with Docker
 Start the containers using Docker Compose:
 ```bash
-chmod +x pyludus.sh 
+chmod +x pyludus.sh
 
 ./pyludus.sh start # Runs docker-compose -d
 
-# Init the database and running initial migrations
-./pyludus.sh shell
-python manage.py makemigrations
-python manage.py migrate
-exit # Exit out of the docker shell
-
-# Restart the docker images
-docker-compose down; sleep 2; docker-compose up -d
 ```
 The `-d` option can be appended to the command to run in detached mode. This runs the containers in the background so the current terminal session is available for use with other things.
 

@@ -12,6 +12,8 @@ class LogoutView(View):
         """HTTP GET: Return the view template and clear the session."""
         request.session.clear()
         # redirect_url = request.build_absolute_uri("fhome")
-        url = (f"{settings.FUSION_AUTH_BASE_URL}/oauth2/logout"
-               f"?client_id={settings.FUSION_AUTH_APP_ID}")
+        url = (
+            f"{settings.FUSION_AUTH_BASE_URL}/oauth2/logout"
+            f"?client_id={settings.FUSION_AUTH_APP_ID}"
+        )
         return redirect(url)
