@@ -59,7 +59,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
     "PyLudus.apps.home",
+    "PyLudus.apps.content",
+
     "widget_tweaks",
     "bootstrap4",
 ]
