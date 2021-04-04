@@ -1,0 +1,18 @@
+-- Brief Into to Python, and external resources --
+
+1, Basic functions such as print, and len
+
+2, Methods
+
+3, Variables, and basic math operators
+
+4, Debugging
+
+5, Working with files
+
+6, Loops
+
+7, Functions
+
+Mini project: Make a program where a user (teacher) can enter a students full name, and student ID and what subject they are studying and this
+information gets processed either to a .json file, a .txt file, or a .csv file
